@@ -64,7 +64,7 @@ height=600
 
 while [ ! -z "$1" ]
 do
-    case "$1" in 
+    case "$1" in
         -h|--help)
             help
             exit
@@ -102,7 +102,7 @@ do
             ;;
         -k|--key)
             KEY=1
-            shift 
+            shift
             ;;
         *)
             shift
@@ -126,5 +126,5 @@ python /tmp/$$.py | yad \
     --title "i3wm Key List" \
     --height $height \
     --width $width \
-    $PAR 
+    $PAR
 rm /tmp/$$.py 2>/dev/null

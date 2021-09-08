@@ -64,7 +64,7 @@ class I3wmKeyList(Gtk.Window):
         self.text_view.set_editable(False)
         self.text_view.set_monospace(True)
         self.text_view.set_cursor_visible(False)
-        self.text_view.set_name('i3wm_text')
+        self.text_view.set_name('i3wmkeylist_textview')
 
         accel_group = Gtk.AccelGroup()
         self.add_accel_group(accel_group)
@@ -96,7 +96,7 @@ class I3wmKeyList(Gtk.Window):
         self._apply_tag()
 
     def set_background(self, back):
-        css = '#i3wm_text text { background-color: ' + back + '; }'
+        css = '#i3wmkeylist_textview text { background-color: ' + back + '; }'
         css_provider = Gtk.CssProvider()
         css_provider.load_from_data(str.encode(css))
 
@@ -147,7 +147,7 @@ def main():
         exit()
 
     #if args.back:
-    #    css = '#i3wm_text text { background-color: ' + args.back + '; }'
+    #    css = '#i3wmkeylist_textview text { background-color: ' + args.back + '; }'
     #    css_provider = Gtk.CssProvider()
     #    css_provider.load_from_data(str.encode(css))
 

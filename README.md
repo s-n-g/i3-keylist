@@ -62,8 +62,8 @@ Then, choose a **key binding** to use to execute the script (I will assume **#mo
 Please make sure **PyGObject** is already installed in your system. Package name: **python-gobject** or **python3-gobject** or similar.
 
     cp i3wmkeylist.py ~/.config/i3/scripts
-    echo 'bindsym $mod+slash exec --no-startup-id ~/.config/i3/scripts/i3wmkeylist.py' >> ~/.condig/i3/config
-    echo 'for_window [title="i3wm Key List"] floating enable border pixel 1' >> ~/.condig/i3/config
+    echo 'bindsym $mod+slash exec --no-startup-id ~/.config/i3/scripts/i3wmkeylist.py' >> ~/.config/i3/config
+    echo 'for_window [title="i3wm Key List"] floating enable border pixel 1' >> ~/.config/i3/config
 
 
 ## 2. Script i3wmkeylist.sh
@@ -96,8 +96,8 @@ Same thing here. Just copy the script to any location of your choosing (I will a
 Then, choose a **key binding** to use to execute the script (I will again assume **#mod+slash**, i.e. **Super+/**).
 
     cp i3wmkeylist.sh ~/.config/i3/scripts
-    echo 'bindsym $mod+slash exec --no-startup-id ~/.config/i3/scripts/i3wmkeylist.sh >> ~/.condig/i3/config
-    echo 'for_window [title="i3wm Key List"] floating enable border pixel 1' >> ~/.condig/i3/config
+    echo 'bindsym $mod+slash exec --no-startup-id ~/.config/i3/scripts/i3wmkeylist.sh >> ~/.config/i3/config
+    echo 'for_window [title="i3wm Key List"] floating enable border pixel 1' >> ~/.config/i3/config
 
 
 
