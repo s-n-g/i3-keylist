@@ -101,7 +101,7 @@ do
             shift
             ;;
         -k|--key)
-            KEY=1
+            KEY='-k'
             shift
             ;;
         *)
@@ -121,7 +121,7 @@ then
 fi
 PAR="$PAR"" --text-info"
 
-python /tmp/$$.py | yad \
+python /tmp/$$.py $KEY | yad \
     --no-buttons \
     --title "i3wm Key List" \
     --height $height \

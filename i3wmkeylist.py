@@ -48,15 +48,14 @@ class I3wmKeyList(Gtk.Window):
 
     width = 800
     height = 600
-    sort_by_key = False
 
-    def __init__(self):
+    def __init__(self, sort_by_key=False):
         super().__init__(title="i3wm Key List")
 
         self.set_border_width(10)
         self.stick()
         textbuffer = Gtk.TextBuffer()
-        s = keys(self.sort_by_key)
+        s = keys(sort_by_key)
         l = len(s)
         textbuffer.set_text(s, l)
 
@@ -146,25 +145,12 @@ def main():
         print_keys(args.key)
         exit()
 
-    #if args.back:
-    #    css = '#i3wmkeylist_textview text { background-color: ' + args.back + '; }'
-    #    css_provider = Gtk.CssProvider()
-    #    css_provider.load_from_data(str.encode(css))
-
-    #    Gtk.StyleContext.add_provider_for_screen(
-    #        Gdk.Screen.get_default(),
-    #        css_provider,
-    #        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-
-    window = I3wmKeyList()
+    window = I3wmKeyList(args.key)
     window.connect("destroy", Gtk.main_quit)
     if args.geometry:
         window.set_user_geometry(args.geometry)
 
     window.set_foreground(args.fore, args.size)
-
-    if args.key:
-        window.sort_by_key = True
 
     if args.back:
         window.set_background(args.back)
