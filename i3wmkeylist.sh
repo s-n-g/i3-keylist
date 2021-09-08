@@ -32,7 +32,7 @@ def keys(sort_by_key=False):
     f=list(filter(lambda x: True if x.startswith('bindsym') else False, a))
 
     for i in range(0, len(f)):
-        f[i] = f[i].replace('--release', '').replace('bindsym ','').replace('exec ','').replace('--no-startup-id ','').replace('\n','').replace('"', '').replace("'", "").split(' ', 1)
+        f[i] = f[i].replace('--release', '').replace('bindsym ','').replace('exec ','').replace('--no-startup-id ','').replace('\n','').replace('"', '').replace("'", "").strip().split(' ', 1)
         #print(f[i])
 
 
