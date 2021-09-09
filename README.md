@@ -37,6 +37,10 @@ theming with each and every release, a shell script (using
 **i3wm-keylist.sh**. This way, it's up to YAD to take care of GTK theme
 breakages.
 
+So, here you are: three scripts that are basically perform the same function. Just test them and use the one that suits you best.
+
+Enjoy!
+
 ## 1. Script i3wm-keylist-view.py
 
 This is the primary script of this project.
