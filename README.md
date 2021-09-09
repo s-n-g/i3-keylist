@@ -1,4 +1,4 @@
-# i3wmkeylist
+# i3wm-keylist
 
 Display i3 Window Manager Key List
 
@@ -9,9 +9,9 @@ Display i3 Window Manager Key List
 <!-- vim-markdown-toc Marked -->
 
 * [Introduction](#introduction)
-* [1. Script i3wmkeylist.py](#1.-script-i3wmkeylist.py)
+* [1. Script i3wm-keylist.py](#1.-script-i3wm-keylist.py)
     * [Installation](#installation)
-* [2. Script i3wmkeylist.sh](#2.-script-i3wmkeylist.sh)
+* [2. Script i3wm-keylist.sh](#2.-script-i3wm-keylist.sh)
     * [Installation](#installation)
 
 <!-- vim-markdown-toc -->
@@ -25,18 +25,18 @@ The idea is to have a window displaying the key bindings used by i3, much like t
 
 My first thought was to use BASH shell scripting and see where it get me, but I finally ended up using **python** for it.
 
-So, [PyGObject](https://pygobject.readthedocs.io/) was the way to go: **i3wmkeylist.py** is the product of this effort.
+So, [PyGObject](https://pygobject.readthedocs.io/) was the way to go: **i3wm-keylist.py** is the product of this effort.
 
-Now, since [GTK](https://www.gtk.org/) is notorious for breaking its theming with each and every release, a shell script (using [YAD](https://github.com/v1cont/yad)) is also availabe: **i3wmkeylist.sh**. This way, it's up to YAD to take care of GTK theme breakages.
+Now, since [GTK](https://www.gtk.org/) is notorious for breaking its theming with each and every release, a shell script (using [YAD](https://github.com/v1cont/yad)) is also availabe: **i3wm-keylist.sh**. This way, it's up to YAD to take care of GTK theme breakages.
 
 
 
-## 1. Script i3wmkeylist.py
+## 1. Script i3wm-keylist.py
 
 This is the primary script of this project.
 
-    $ i3wmkeylist.py -h
-    usage: i3wmkeylist.py [-h] [-g GEOMETRY] [-f FORE] [-b BACK]
+    $ i3wm-keylist.py -h
+    usage: i3wm-keylist.py [-h] [-g GEOMETRY] [-f FORE] [-b BACK]
                           [-s SIZE] [-k] [--shell]
 
     i3wm Key List Display Utility
@@ -61,12 +61,12 @@ Then, choose a **key binding** to use to execute the script (I will assume **#mo
 
 Please make sure **PyGObject** is already installed in your system. Package name: **python-gobject** or **python3-gobject** or similar.
 
-    cp i3wmkeylist.py ~/.config/i3/scripts
-    echo 'bindsym $mod+slash exec --no-startup-id ~/.config/i3/scripts/i3wmkeylist.py' >> ~/.config/i3/config
+    cp i3wm-keylist.py ~/.config/i3/scripts
+    echo 'bindsym $mod+slash exec --no-startup-id ~/.config/i3/scripts/i3wm-keylist.py' >> ~/.config/i3/config
     echo 'for_window [title="i3wm Key List"] floating enable border pixel 1' >> ~/.config/i3/config
 
 
-## 2. Script i3wmkeylist.sh
+## 2. Script i3wm-keylist.sh
 
 This is the alternative script of the project.
 
@@ -74,8 +74,8 @@ You should use this script in case the previous one stops working (setting color
 
 Please meke sure [YAD](https://github.com/v1cont/yad) is already installed in your system.
 
-    $ i3wmkeylist.sh -h
-    usage: i3wmkeylist.sh [-h] [-g GEOMETRY] [-f FORE] [-b BACK] [-k]
+    $ i3wm-keylist.sh -h
+    usage: i3wm-keylist.sh [-h] [-g GEOMETRY] [-f FORE] [-b BACK] [-k]
 
     i3wm Key List Display Utility
 
@@ -95,8 +95,8 @@ Same thing here. Just copy the script to any location of your choosing (I will a
 
 Then, choose a **key binding** to use to execute the script (I will again assume **#mod+slash**, i.e. **Super+/**).
 
-    cp i3wmkeylist.sh ~/.config/i3/scripts
-    echo 'bindsym $mod+slash exec --no-startup-id ~/.config/i3/scripts/i3wmkeylist.sh >> ~/.config/i3/config
+    cp i3wm-keylist.sh ~/.config/i3/scripts
+    echo 'bindsym $mod+slash exec --no-startup-id ~/.config/i3/scripts/i3wm-keylist.sh >> ~/.config/i3/config
     echo 'for_window [title="i3wm Key List"] floating enable border pixel 1' >> ~/.config/i3/config
 
 
