@@ -3,7 +3,7 @@ function help(){
 cat << END
 usage: $(basename "$0") [-h] [-g GEOMETRY] [-f FORE] [-b BACK] [-k]
 
-i3wm Key List Display Utility
+i3 Key List Display Utility
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -123,7 +123,7 @@ PAR="$PAR"" --text-info"
 
 python /tmp/$$.py $KEY | yad \
     --no-buttons \
-    --title "i3wm Key List" \
+    --title "i3 Key List" \
     --height $height \
     --width $width \
     $PAR

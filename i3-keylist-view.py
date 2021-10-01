@@ -59,7 +59,7 @@ class I3wmKeyList(Gtk.Window):
         size=None,
         sort_by_key=False
     ):
-        super().__init__(title="i3wm Key List")
+        super().__init__(title="i3 Key List")
 
         self.set_border_width(10)
         self.stick()
@@ -122,7 +122,7 @@ class I3wmKeyList(Gtk.Window):
         Gtk.main_quit()
 
 def main():
-    parser = ArgumentParser(description='i3wm Key List Display Utility')
+    parser = ArgumentParser(description='i3 Key List Display Utility')
 
     parser.add_argument('-g', '--geometry', default='',
                         help='use this window size (default is 800x600)')

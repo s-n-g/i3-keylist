@@ -50,7 +50,7 @@ class I3wmKeyList(Gtk.Window):
     height = 600
 
     def __init__(self, sort_by_key=False):
-        super().__init__(title="i3wm Key List")
+        super().__init__(title="i3 Key List")
 
         self.set_border_width(10)
         self.stick()
@@ -63,7 +63,7 @@ class I3wmKeyList(Gtk.Window):
         self.text_view.set_editable(False)
         self.text_view.set_monospace(True)
         self.text_view.set_cursor_visible(False)
-        self.text_view.set_name('i3wm_keylist_textview')
+        self.text_view.set_name('i3_keylist_textview')
 
         accel_group = Gtk.AccelGroup()
         self.add_accel_group(accel_group)
@@ -95,7 +95,7 @@ class I3wmKeyList(Gtk.Window):
         self._apply_tag()
 
     def set_background(self, back):
-        css = '#i3wm_keylist_textview text { background-color: ' + back + '; }'
+        css = '#i3_keylist_textview text { background-color: ' + back + '; }'
         css_provider = Gtk.CssProvider()
         css_provider.load_from_data(str.encode(css))
 
@@ -124,7 +124,7 @@ class I3wmKeyList(Gtk.Window):
         Gtk.main_quit()
 
 def main():
-    parser = ArgumentParser(description='i3wm Key List Display Utility')
+    parser = ArgumentParser(description='i3 Key List Display Utility')
 
     parser.add_argument('-g', '--geometry', default='',
                         help='use this window size (default is 800x600)')
