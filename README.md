@@ -46,13 +46,15 @@ Enjoy!
 This is the primary script of this project.
 
     $ i3-keylist-view.py -h
-    usage: i3-keylist-view.py [-h] [-g GEOMETRY] [-f FORE] [-b BACK]
-                          [-s SIZE] [-k] [--shell]
+    usage: i3-keylist-view.py [-h] [-i INPUT_FILE] [-g GEOMETRY] [-f FORE]
+                              [-b BACK] [-s SIZE] [-k] [--shell]
 
     i3 Key List Display Utility
 
     optional arguments:
       -h, --help            show this help message and exit
+      -i INPUT_FILE, --input-file INPUT_FILE
+                            read keys from this file instead of the default
       -g GEOMETRY, --geometry GEOMETRY
                             use this window size (default is 800x600)
       -f FORE, --fore FORE  set the foreground color
@@ -85,13 +87,15 @@ This is the old primary script of this project, kept here just for
 reference.
 
     $ i3-keylist.py -h
-    usage: i3-keylist.py [-h] [-g GEOMETRY] [-f FORE] [-b BACK]
-                          [-s SIZE] [-k] [--shell]
+    usage: i3-keylist.py [-h] [-i INPUT_FILE] [-g GEOMETRY] [-f FORE] [-b BACK]
+                         [-s SIZE] [-k] [--shell]
 
     i3 Key List Display Utility
 
     optional arguments:
       -h, --help            show this help message and exit
+      -i INPUT_FILE, --input-file INPUT_FILE
+                            read keys from this file instead of the default
       -g GEOMETRY, --geometry GEOMETRY
                             use this window size (default is 800x600)
       -f FORE, --fore FORE  set the foreground color
@@ -135,6 +139,8 @@ installed in your system.
 
     optional arguments:
       -h, --help            show this help message and exit
+      -i INPUT_FILE, --input-file INPUT_FILE
+                            read keys from this file instead of the default
       -g GEOMETRY, --geometry GEOMETRY
                             use this window size (default is 800x600)
       -f FORE, --fore FORE  set the foreground color

@@ -7,6 +7,8 @@ i3 Key List Display Utility
 
 optional arguments:
   -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file INPUT_FILE
+                        read keys from this file instead of the default
   -g GEOMETRY, --geometry GEOMETRY
                         use this window size (default is 800x600)
   -f FORE, --fore FORE  set the foreground color
@@ -21,12 +23,14 @@ cat << END > /tmp/$$.py
 from os import path
 import sys
 
-def keys(sort_by_key=False):
+def keys(filename=None, sort_by_key=False):
+    if filename is None:
+        filename = path.expanduser('~') + '/.config/i3/config'
     try:
-        with open(path.expanduser('~') + '/.config/i3/config', 'r') as f:
+        with open(filename, 'r') as f:
             a=f.readlines()
     except:
-        print('Error opening ~/.config/i3/config')
+        print('Error opening ' + filename)
         sys.exit(1)
 
     f=list(filter(lambda x: True if x.startswith('bindsym') else False, a))
@@ -53,8 +57,19 @@ def keys(sort_by_key=False):
         ret = ret + f[i][0] + f[i][1] + '\n'
     return ret
 
-sort_by_key = True if len(sys.argv) > 1 else False
-print(keys(sort_by_key))
+filename=None
+sort_by_key=False
+if len(sys.argv) == 3:
+    filename=sys.argv[1]
+    if filename == '':
+        filename=None
+    sort_by_key=sys.argv[2]
+elif len(sys.argv) == 2:
+    filename=sys.argv[1]
+if filename == '-':
+    filename=None
+
+print(keys(filename=filename, sort_by_key=sort_by_key))
 END
 }
 
@@ -62,12 +77,23 @@ width=800
 height=600
 
 
+FILE='-'
+DO_SHELL=''
 while [ ! -z "$1" ]
 do
     case "$1" in
         -h|--help)
             help
             exit
+            ;;
+        --shell):
+            DO_SHELL=1
+            shift
+            ;;
+        -i|--input-file)
+            shift
+            FILE="$1"
+            shift
             ;;
         -g|--geometry)
             shift
@@ -121,10 +147,15 @@ then
 fi
 PAR="$PAR"" --text-info"
 
-python /tmp/$$.py $KEY | yad \
-    --no-buttons \
-    --title "i3 Key List" \
-    --height $height \
-    --width $width \
-    $PAR
+if [ -z "$DO_SHELL" ]
+then
+    python /tmp/$$.py $FILE $KEY | yad \
+        --no-buttons \
+        --title "i3 Key List" \
+        --height $height \
+        --width $width \
+        $PAR
+else
+    python /tmp/$$.py $FILE $KEY
+fi
 rm /tmp/$$.py 2>/dev/null

@@ -8,43 +8,46 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
 
 
-def keys(sort_by_key=False, return_a_string=False):
+def keys(filename=None, sort_by_key=False, return_a_string=False):
+    if filename is None:
+        filename = path.expanduser('~') + '/.config/i3/config'
     try:
-        with open(path.expanduser('~') + '/.config/i3/config', 'r') as f:
-            a=f.readlines()
+        with open(filename, 'r') as f:
+            the_lines=f.readlines()
     except:
-        print('Error opening ~/.config/i3/config')
+        print('Error opening ' + filename)
         exit(1)
 
-    f=list(filter(lambda x: True if x.startswith('bindsym') else False, a))
+    the_keys=list(filter(lambda x: True if x.startswith('bindsym') else False, the_lines))
 
-    for i in range(0, len(f)):
-        f[i] = f[i].replace('--release', '').replace('bindsym ','').replace('exec ','').replace('--no-startup-id ','').replace('\n','').replace('"', '').replace("'", "").strip().split(' ', 1)
-        #print(f[i])
+    for i in range(0, len(the_keys)):
+        the_keys[i] = the_keys[i].replace('--release', '').replace('bindsym ','').replace('exec ','').replace('--no-startup-id ','').replace('\n','').replace('"', '').replace("'", "").strip().split(' ', 1)
+        #print(the_keys[i])
 
 
-    mmax = max([len(x[0]) for x in f]) + 4
+    mmax = max([len(x[0]) for x in the_keys]) + 4
 
-    for i in range(0, len(f)):
-        f[i][0] = f[i][0].ljust(mmax)
-        if f[i][1].startswith('i3-nagbar'):
-            f[i][1] = 'i3-nagbar'
+    for i in range(0, len(the_keys)):
+        the_keys[i][0] = the_keys[i][0].ljust(mmax)
+        if the_keys[i][1].startswith('i3-nagbar'):
+            the_keys[i][1] = 'i3-nagbar'
 
     if sort_by_key:
-        f.sort()
+        the_keys.sort()
     else:
-        f.sort(key=lambda x: x[1])
+        the_keys.sort(key=lambda x: x[1])
 
     if not return_a_string:
-        return f
+        return the_keys
 
     ret = ''
-    for i in range(0, len(f)):
-        ret = ret + f[i][0] + f[i][1] + '\n'
+    for i in range(0, len(the_keys)):
+        ret = ret + the_keys[i][0] + the_keys[i][1] + '\n'
     return ret
 
-def print_keys(sort_by_key=False):
-    print(keys(sort_by_key))
+def print_keys(filename=None, sort_by_key=False):
+    for n in keys(filename=filename, sort_by_key=sort_by_key):
+        print(*n)
 
 
 class I3wmKeyList(Gtk.Window):
@@ -54,6 +57,7 @@ class I3wmKeyList(Gtk.Window):
 
     def __init__(
         self,
+        filename=None,
         foreground=None,
         background=None,
         size=None,
@@ -64,12 +68,12 @@ class I3wmKeyList(Gtk.Window):
         self.set_border_width(10)
         self.stick()
         textbuffer = Gtk.TextBuffer()
-        s = keys(sort_by_key)
-        l = len(s)
+        the_keys = keys(filename=filename, sort_by_key=sort_by_key)
+        l = len(the_keys)
 
         store = Gtk.ListStore(str, str)
-        for n in range(0, len(s)):
-            treeiter = store.append(s[n])
+        for n in range(0, len(the_keys)):
+            treeiter = store.append(the_keys[n])
 
         tree = Gtk.TreeView(model=store)
         tree.set_can_focus(False)
@@ -124,6 +128,8 @@ class I3wmKeyList(Gtk.Window):
 def main():
     parser = ArgumentParser(description='i3 Key List Display Utility')
 
+    parser.add_argument('-i', '--input-file', default=None,
+                        help='read keys from this file instead of the default')
     parser.add_argument('-g', '--geometry', default='',
                         help='use this window size (default is 800x600)')
     parser.add_argument('-f', '--fore', default=None,
@@ -140,10 +146,11 @@ def main():
     args = parser.parse_args()
 
     if args.shell:
-        print_keys(args.key)
+        print_keys(filename=args.input_file, sort_by_key=args.key)
         exit()
 
     window = I3wmKeyList(
+        filename=args.input_file,
         foreground=args.fore,
         background=args.back,
         size=args.size,
